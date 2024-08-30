@@ -6,6 +6,9 @@
  - Ítalo Béllo Silva (Lflickr)
  - Kaike Freitas de França (KaikeFF)
 
+## Organização do projeto
+Projeto organizado pela plataforam trello
+link:
 ## Resumo do projeto
 
 ## Tecnologias utilizadas 
