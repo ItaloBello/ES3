@@ -9,7 +9,24 @@
 ## Resumo do projeto
 
 ## Tecnologias utilizadas 
+### Front-End
+ - HTML5
+ - CSS3
+ - JavaScript
+ - Bootstap
 
+### Back-End
+ - Node.js
+   
+### Banco de dados
+ - Orcle
+   
+### Ferramentas
+ - SQLDeveloper
+ - BRmodelo
+ - VS Code
+ - Balsamiqs mockups
+   
 ## Casos de uso
 
 ## DER
