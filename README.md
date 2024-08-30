@@ -19,7 +19,7 @@
  - Node.js
    
 ### Banco de dados
- - Orcle
+ - Oracle
    
 ### Ferramentas
  - SQLDeveloper
