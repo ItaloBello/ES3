@@ -1,7 +1,7 @@
 @startuml CasosDeUso
 left to right direction
 actor Jogador as J
-actor dono de quadra as D
+actor "dono de quadra" as D
 package System{
     usecase "Editar time" as UC1
     usecase "Adicionar jogador" as UC2
