@@ -1,0 +1,34 @@
+@startuml CasosDeUso
+left to right direction
+actor Jogador as J
+actor dono de quadra as D
+package System{
+    usecase "Editar time" as UC1
+    usecase "Adicionar jogador" as UC2
+    usecase "Marcar amistoso" as UC3
+    usecase "Agendar partida" as UC4
+    usecase "Criar time" as UC5
+    usecase "Adicionar Jogadores" as UC6
+    usecase "Solicitar entrar em time" as UC7
+    usecase "Entrar em time" as UC8
+    usecase "Definir escalamento de time" as UC9
+    usecase "Marcar campeonato" as UC10
+    usecase "Disponibilizar quadra" as UC11
+    usecase "Editar campeonato" as UC12
+}
+
+J -- UC1
+J -- UC2
+J -- UC3
+J -- UC4
+J -- UC5
+J -- UC6
+J -- UC7
+UC7 .> UC8 : <extends>
+J -- UC9
+
+D -- UC10
+D -- UC11
+D -- UC12
+
+@enduml
