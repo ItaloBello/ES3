@@ -10,7 +10,7 @@
 Projeto organizado pela plataforam trello
 link:
 ## Resumo do projeto
-A ideia de um sistema para tornar espaços esportivos mais atrativos e consequente mais rentáveis passa por gamificar os esportes. O sistema visa que todos os esportistas que desejam locar quadras para praticar esportes, possam fazer isso através dele, agendando horários e realizando pagamentos antecipados. No assunto gamificação, o software trará a possibilidade da criação de times e agendamento de amistosos por parte do esportista, enquanto isso, o dono do estabelecimento poderá criar competições para atrair o público para seu espaço. O sistema contará com uma espécie de ranking, no qual estará no topo o usuário ou time, que mais realizou agendamentos naquele período, este ganhará brindes e benefícios. Além diso, o sistema deverá manter em segurança todos os dados dos usuários.
+A ideia de um sistema para tornar espaços esportivos mais atrativos e consequente mais rentáveis passa por gamificar os esportes. O sistema visa que todos os esportistas que desejam locar quadras para praticar esportes, possam fazer isso através dele, agendando horários e realizando pagamentos antecipados. No assunto gamificação, o software trará a possibilidade da criação de times e agendamento de amistosos por parte do esportista, enquanto isso, o dono do estabelecimento poderá criar competições para atrair o público para seu espaço. O sistema contará com uma espécie de ranking, no qual estará no topo o usuário ou time, que mais realizou agendamentos naquele período, este ganhará brindes e benefícios. Além disso, o sistema deverá manter em segurança todos os dados dos usuários.
 
 
 ## Tecnologias utilizadas 
