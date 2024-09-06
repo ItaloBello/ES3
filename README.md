@@ -18,20 +18,20 @@ A ideia de um sistema para tornar espaços esportivos mais atrativos e consequen
  - HTML5
  - CSS3
  - JavaScript
- - Bootstap
+ - React
 
 ### Back-End
  - Node.js
    
 ### Banco de dados
- - Oracle
+ - MySQL
    
 ### Ferramentas
- - SQLDeveloper
+ - MySQL
  - BRmodelo
  - VS Code
- - Balsamiqs mockups
-   
+ - Figma
+
 ## Casos de uso
 ![Casos de uso](docs/useCases/CasosDeUso.png)
 ## DER
