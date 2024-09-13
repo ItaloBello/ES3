@@ -46,8 +46,11 @@ A ideia de um sistema para tornar espaços esportivos mais atrativos e consequen
  - Jogadores
  - Times
  - Jogos
- - - Amistosos
- - - Campeonatos
+   - Amistosos
+   - Campeonatos
 
 
 ##Telas
+### Dono da Quadra
+
+### Jogador
