@@ -37,3 +37,17 @@ A ideia de um sistema para tornar espaços esportivos mais atrativos e consequen
 ## DER
 
 ## Diagrama de classes
+
+#Listagem
+
+##Tabelas
+ - Dono de Quadra
+ - Quadras
+ - Jogadores
+ - Times
+ - Jogos
+ - - Amistosos
+ - - Campeonatos
+
+
+##Telas
