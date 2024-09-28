@@ -9,12 +9,16 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a> <!-- Link para a página inicial -->
         </li>
+        {{#if user}}
+
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/usuario/registro">Registro</a> <!-- Link para a página de registro -->
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/usuario/login">Login</a> <!-- Link para a página de login -->
         </li>
+        {{/if}}
       </ul>
     </div>
   </div>
