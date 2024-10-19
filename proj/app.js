@@ -80,6 +80,12 @@ app.get('/', (req, res) => {
     res.render('home'); 
 });
 
+// Start do login
+app.get("/logout", (req,res) => {
+    req.session.destroy()
+    res.redirect('/')
+})
+
 //Outros
 const PORT = 8081
 app.listen(PORT, function(){

@@ -76,8 +76,19 @@ function validarCNPJ(cnpj) {
     return resultado === parseInt(digitos.charAt(1));
 }
 
+async function validarEmail(email){
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(email)){
+
+            return false
+        }
+        return true
+    }
+
 
 module.exports = {
     validarCPF,
-    validarCNPJ
+    validarCNPJ,
+    validarEmail
 };

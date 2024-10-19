@@ -4,12 +4,14 @@ const {eAdmin}= require("../Helpers/eAdmin")
 
 
 router.get('/', eAdmin, function(req, res){
-    res.render("admin")
+    let ehAdmin = true
+    res.render('admin/index',{ehAdmin:ehAdmin});
 
 })
 
 router.get('/index', eAdmin, function(req, res){
-    res.render('admin/index');
+    let ehAdmin = true
+    res.render('admin/index',{ehAdmin:ehAdmin});
 });
 
 //exportando o modulo

@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Usuario = require('../Models/Usuario')
 const bodyParser = require('body-parser')
-const { validarCPF, validarCNPJ } = require('../Utils/validarDocumento')
+const { validarCPF, validarCNPJ, validarEmail } = require('../Utils/validarDocumento')
 const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
 const passport = require('passport')
@@ -15,15 +15,27 @@ router.get("/registro", function(req, res) {
     res.render("usuario/registro")
 });
 
-router.post("/registro", function(req, res) {
+router.post("/registro", async function(req, res) {
     var erros = [];
 
     if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
         erros.push({ texto: "Nome inválido!" });
     }
 
-    if (!req.body.email || typeof req.body.email == undefined || req.body.email == null) {
+    if (!req.body.email || typeof req.body.email == undefined || req.body.email == null || !validarEmail(req.body.email)) {
         erros.push({ texto: "Email inválido!" });
+    }
+    else{
+        const apiKey = '6da1404dd0bccc266369810e5495509947162526';
+        const response = await fetch(`https://api.hunter.io/v2/email-verifier?email=${req.body.email}&api_key=${apiKey}`);
+        const data = await response.json();
+        if(!data.data){
+
+            erros.push({ texto: "Email inválido!" });
+        }
+        if(data.data.status === 'invalid'){
+                erros.push({ texto: "Email inválido!" });
+            }
     }
 
     if (!req.body.endereco || typeof req.body.endereco == undefined || req.body.endereco == null) {
