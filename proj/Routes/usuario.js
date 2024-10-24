@@ -6,6 +6,7 @@ const { validarCPF, validarCNPJ } = require('../Utils/validarDocumento')
 const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
 const passport = require('passport')
+const eAdmin = require("../Helpers/eAdmin")
 
 
 router.use(bodyParser.json());
