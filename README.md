@@ -33,7 +33,7 @@ A ideia de um sistema para tornar espaços esportivos mais atrativos e consequen
  - Figma
 
 ## Casos de uso
-![Casos de uso](docs/useCases/CasosDeUso.png)
+![Casos de uso](docs/useCases/casosDeUso.png)
 ## DER
 
 ## Diagrama de classes

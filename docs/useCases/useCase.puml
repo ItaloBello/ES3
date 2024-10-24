@@ -1,32 +1,51 @@
-@startuml CasosDeUso
+@startuml casoDeUso
 left to right direction
 actor Jogador as J
 actor "dono de quadra" as D
+actor "Lider de time" as L
 package System{
     usecase "Editar time" as UC1
-    usecase "Marcar amistoso" as UC2
-    usecase "Agendar partida" as UC3
-    usecase "Criar time" as UC4
-    usecase "Adicionar Jogadores ao time" as UC5
-    usecase "Solicitar entrar em time" as UC6
-    usecase "Entrar em time" as UC7
-    usecase "Definir escalamento de time" as UC8
-    usecase "Marcar campeonato" as UC9
-    usecase "Disponibilizar quadra" as UC10
-    usecase "Editar campeonato" as UC11
+    usecase "Transferir Posse" as UC2
+    usecase "Marcar amistoso" as UC3
+    usecase "Agendar Jogo" as UC4
+    usecase "Criar time" as UC5
+    usecase "Adicionar Jogadores ao time" as UC6
+    usecase "Solicitar entrar em time" as UC7
+    usecase "Entrar em time" as UC8
+    usecase "Participar do Campeonato" as UC9
+    usecase "Definir escalamento de time" as UC10
+    usecase "Pagar Sinal" as UC11
+    usecase "Marcar Presença" as UC12
+
+    usecase "Criar campeonato" as UC13
+    usecase "Configurar Tipo de Campeonato" as UC14
+    usecase "Marcar dias de Campeonato" as UC15
+    usecase "Visualizar agendamentos" as UC16
+    usecase "Cancelar agendamentos" as UC17
+    usecase "Controlar Campeonato" as UC18
+    usecase "Editar campeonato" as UC19
+    usecase "Cadastrar Unidade" as UC20
 }
 
-J -- UC1
-J -- UC2
-J -- UC3
+J <|- L
+L -- UC1
+UC2 <. UC1 : <extends>
+L -- UC3
 J -- UC4
 J -- UC5
-J -- UC6
-UC6 .> UC7 : <extends>
-J -- UC8
-
-D -- UC9
-D -- UC10
-D -- UC11
-
+L -- UC6
+J -- UC7
+UC7 .> UC8 : <extends>
+L -- UC9
+UC9 <. UC10 : <include>
+L -- UC11
+L -- UC12
+D -- UC13
+UC13 <. UC14 : <include>
+UC13 <. UC15 : <include>
+D -- UC16
+D -- UC17
+D -- UC18
+D -- UC19
+D -- UC20
 @enduml
