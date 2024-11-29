@@ -76,7 +76,7 @@ router.post("/login", (req, res, next) => {
 
         req.login(user, (loginErr) => {
             if (loginErr) return res.status(500).json({ error: "Erro ao logar" });
-            return res.json({ message: "Login realizado com sucesso!" });
+            return res.json({ message: "Login realizado com sucesso!", id: user.id});
         });
     })(req, res, next);
 });
@@ -86,7 +86,7 @@ router.post('/cadastrarQuadra', async (req, res) => {
     try{
         const nome = req.body.nome;
         const tipo = req.body.tipo;
-        const userId = req.body.userId;
+        const userId = req.body.usuarioId;
     
     const quadra = {
         nome: nome,
@@ -112,6 +112,45 @@ router.get('/quadras/:id', async (req,res) => {
         return res.json({message: error})
     }
 })
+
+router.put('/atualizarQuadra/:id', async (req, res) => {
+    
+    try{
+        const id = req.params.id
+        const nome = req.body.nome;
+        const tipo = req.body.tipo;
+        const userId = req.body.userId;
+    
+    const quadra = {
+        nome: nome,
+        tipo: tipo,
+        usuarioId: userId
+    }
+    await Quadra.update(quadra,{where:{id:id}});
+    return res.json({message: "Quadra editada com sucesso!"})
+    }
+    catch(error){
+        return res.json({message: error})
+    }
+})
+
+router.delete('/excluirQuadra/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        // Deleta a quadra pelo ID
+        const result = await Quadra.destroy({ where: { id: id } });
+
+        if (result === 0) {
+            return res.status(404).json({ message: "Quadra não encontrada." });
+        }
+
+        return res.json({ message: "Quadra deletada com sucesso!" });
+    } catch (error) {
+        console.error(error); // Log do erro para depuração
+        return res.status(500).json({ message: "Erro ao deletar a quadra.", error: error.message });
+    }
+});
 
 //exportando o modulo
 module.exports = router
