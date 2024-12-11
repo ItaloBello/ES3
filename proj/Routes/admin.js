@@ -113,26 +113,54 @@ router.get('/quadras/:id', async (req,res) => {
     }
 })
 
-router.put('/atualizarQuadra/:id', async (req, res) => {
+router.get('/info/:id', async (req,res) => {
     
-    try{
-        const id = req.params.id
-        const nome = req.body.nome;
-        const tipo = req.body.tipo;
-        const userId = req.body.userId;
-    
-    const quadra = {
-        nome: nome,
-        tipo: tipo,
-        usuarioId: userId
-    }
-    await Quadra.update(quadra,{where:{id:id}});
-    return res.json({message: "Quadra editada com sucesso!"})
+    try{ 
+        const userId = req.params.id
+        const user = await Usuario.findOne({where: {id: userId}});
+        return res.json(user)
     }
     catch(error){
         return res.json({message: error})
     }
 })
+
+router.get('/quadra/:id', async (req,res) => {
+    
+    try{ 
+        const quadraId = req.params.id
+        const quadra = await Quadra.findOne({where: {id: quadraId}});
+        return res.json(quadra)
+    }
+    catch(error){
+        return res.json({message: error})
+    }
+})
+
+router.put('/atualizarQuadra/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { nome, tipo, usuarioId } = req.body;
+
+        const quadra = {
+            nome: nome,
+            tipo: tipo,
+            usuarioId: usuarioId
+        };
+
+        const [updated] = await Quadra.update(quadra, { where: { id: id } });
+
+        if (updated) {
+            return res.json({ message: "Quadra editada com sucesso!" });
+        } else {
+            return res.status(404).json({ message: "Quadra não encontrada para o ID especificado." });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Erro ao atualizar quadra: " + error.message });
+    }
+});
+
 
 router.delete('/excluirQuadra/:id', async (req, res) => {
     try {

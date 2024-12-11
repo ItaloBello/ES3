@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('../Models/Usuario');
+const Time = require('../Models/Time')
 const bcrypt = require('bcrypt');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const passport = require('passport');
 const { validarCPF, validarCNPJ, validarEmail } = require('../Utils/validarDocumento');
 
@@ -73,9 +74,35 @@ router.post("/login", (req, res, next) => {
 
         req.login(user, (loginErr) => {
             if (loginErr) return res.status(500).json({ error: "Erro ao logar" });
-            return res.json({ message: "Login realizado com sucesso!" });
+            return res.json({ message: "Login realizado com sucesso!", id: user.id });
         });
     })(req, res, next);
 });
+
+router.get("/times/:userId", async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const times = await Time.findAll({ where: { userId: userId } });
+        return res.status(200).json({ times });
+    } catch (err) {
+        return res.status(400).json({ error: err });
+    }
+});
+
+
+router.post("/times", async (req,res) => {
+    
+    const userId = req.body.userId;
+    const nome = req.body.nome;
+    const img = req.body.img;
+
+    try{
+        await Time.create({userId: userId, nome: nome, img: img})
+        return res.status(200).json({message: "Time criado com sucesso!"})
+    }
+    catch(err){
+        return res.status(400).json({error:err})
+    }
+})
 
 module.exports = router;
