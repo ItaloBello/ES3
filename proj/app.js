@@ -1,87 +1,75 @@
-//Carregando os módulos
 require('dotenv').config();
-const express = require('express')
-const { engine }  = require('express-handlebars')
-const bodyParser = require('body-parser')
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 const sequelize = require('./database');
-const adminRoute = require('./Routes/admin')
-const userRoute = require('./Routes/usuario')
-const path = require('path')
-const Usuario = require('./Models/Usuario')
-const flash = require('connect-flash');
+const adminRoute = require('./Routes/admin');
+const userRoute = require('./Routes/usuario');
+const cors = require('cors'); // Novo módulo para CORS
 const session = require('express-session');
+const flash = require('connect-flash');
 const passport = require('passport');
-require('./Config/auth')(passport)
+require('./Config/auth')(passport);
 
+// Iniciar o servidor
+const PORT = 8081;
 
+// Configuração do CORS
+app.use(cors());
 
+// Configuração da sessão
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
 
-//Config
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
-    // Sessão
-    app.use(session({
-        secret: process.env.SESSION_SECRET,
-        resave: true,
-        saveUninitialized: true
-    }));
-
-    //Flash
-    app.use(passport.initialize())
-    app.use(passport.session())
-    app.use(flash());
-    
-
-    // Middleware para configurar variáveis globais para o `flash`
-    app.use((req, res, next) => {
-        res.locals.success_msg = req.flash('success_msg');
-        res.locals.error_msg = req.flash('error_msg');
-        res.locals.error = req.flash('error')[0]; 
-        res.locals.user = req.user || null;
-
-        next();
-    });
-
-    //Body Parser
-        app.use(bodyParser.urlencoded({extended: true}))
-        app.use(bodyParser.json())
-    //HandleBars
-        app.engine('handlebars', engine({defaultLayout: 'main'}))    
-        app.set('view engine', 'handlebars');
-
-    //MySql -> database.js
-
-
-
-    //Path
-        app.set('views', path.join(__dirname, 'views'));
-        app.use(express.static(path.join(__dirname, 'Public')))
-    
-    
-// Teste de Conexão
-sequelize.authenticate()
-    .then(function() {
-        console.log('Conexão com o MySQL estabelecida com sucesso.');
-        
-        // Criando a tabela(deixar comentado o force dps de criar para criar 1x só)
-        Usuario.sync(/*{ force: true }*/)
-    })
-    .then(function() {
-
-//Rotas
-        //ADM
-        app.use('/admin', adminRoute);
-        //USUARIOS
-        app.use('/usuario', userRoute);
-})
-
-// Rota para a página inicial
-app.get('/', (req, res) => {
-    res.render('home'); 
+// Middleware para mensagens de flash
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error')[0]; 
+    res.locals.user = req.user || null;
+    next();
 });
 
-//Outros
-const PORT = 8081
-app.listen(PORT, function(){
-    console.log("Servidor Rodando na porta" + PORT)
-})
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Conexão com o banco de dados e sincronização de tabelas
+sequelize.authenticate()
+    .then(() => {
+        console.log(`Conexão com o Postgres estabelecida com sucesso na porta ${PORT}.`);
+        return sequelize.sync(); // Sincroniza as tabelas automaticamente
+    })
+    .then(() => {
+        console.log("Tabelas sincronizadas com sucesso.");
+    })
+    .catch(error => {
+        console.error("Erro ao conectar ou sincronizar tabelas:", error);
+    });
+
+// Rotas da API
+app.use('/api/admin', adminRoute);
+app.use('/api/usuario', userRoute);
+
+// Rota inicial
+app.get('/', (req, res) => {
+    res.json({ message: "Bem-vindo à API" });
+});
+
+// Logout
+app.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+
+app.listen(PORT, () => {
+    console.log("Servidor rodando na porta " + PORT);
+});
+
