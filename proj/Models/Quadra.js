@@ -29,7 +29,6 @@ const Quadra = sequelize.define('quadra',{
     timestamps: false 
 })
 
-Quadra.hasOne(Usuario);
-Usuario.hasMany(Quadra);
+
 
 module.exports = Quadra;

@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 // Conexão com o banco de dados e sincronização de tabelas
 sequelize.authenticate()
     .then(() => {
-        console.log(`Conexão com o MySQL estabelecida com sucesso na porta ${PORT}.`);
+        console.log(`Conexão com o Postgres estabelecida com sucesso na porta ${PORT}.`);
         return sequelize.sync(); // Sincroniza as tabelas automaticamente
     })
     .then(() => {
@@ -72,3 +72,4 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
     console.log("Servidor rodando na porta " + PORT);
 });
+

@@ -1,53 +1,50 @@
-// Conecta no Banco
-const Sequelize = require('sequelize')
-const sequelize = require('../database')
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../database'); // Conexão com o banco de dados PostgreSQL
 
-//Model(tabela sem comando sql) - Usuarios
-const Usuario = sequelize.define('usuarios',{
+// Modelo (tabela sem comando SQL) - Usuarios
+const Usuario = sequelize.define('usuarios', {
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
     nome: {
-        type: Sequelize.STRING(100),
-        allowNull: false
+        type: DataTypes.STRING(100),
+        allowNull: false,
     },
     email: {
-        type: Sequelize.STRING(100),
+        type: DataTypes.STRING(100),
         allowNull: false,
-        unique: true
-        
+        unique: true,
     },
     eAdmin: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0   
-
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
     },
     endereco: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     documento: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
     senha: {
-        type: Sequelize.CHAR(60),
-        allowNull: false
+        type: DataTypes.CHAR(60),
+        allowNull: false,
     },
     data_nascimento: {
-        type: Sequelize.DATE,
-        allowNull: false
+        type: DataTypes.DATE,
+        allowNull: false,
     },
     data_criacao: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-        allowNull: false
-    }
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.NOW, // Sequelize.NOW funciona no PostgreSQL também
+        allowNull: false,
+    },
 }, {
-    timestamps: false 
-})
+    timestamps: false, // Desativa os campos createdAt e updatedAt
+});
 
 module.exports = Usuario;
