@@ -60,13 +60,12 @@ app.use('/api/usuario', userRoute);
 
 // Rota inicial
 app.get('/', (req, res) => {
-    res.json({ message: "Bem-vindo à API" });
+    res.json({ message: "Bem-vindo ao backend da sportech" });
 });
 
 // Logout
 app.get("/logout", (req, res) => {
     req.session.destroy();
-    res.redirect('/');
 });
 
 app.listen(PORT, () => {

@@ -12,12 +12,12 @@ const Quadra = sequelize.define('quadra',{
     },
     nome: {
         type: Sequelize.STRING(100),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     tipo: {
         type: Sequelize.STRING(100),
-        allowNull: false,
-        unique: true
+        allowNull: false
         
     },
     data_criacao: {
@@ -29,7 +29,7 @@ const Quadra = sequelize.define('quadra',{
     timestamps: false 
 })
 
-Quadra.hasOne(Usuario);
+Quadra.belongsTo(Usuario);
 Usuario.hasMany(Quadra);
 
 module.exports = Quadra;

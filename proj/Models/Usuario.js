@@ -20,8 +20,8 @@ const Usuario = sequelize.define('usuarios',{
         
     },
     eAdmin: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0   
+        type: Sequelize.BOOLEAN,
+        defaultValue: false 
 
     },
     endereco: {

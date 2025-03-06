@@ -1,18 +1,5 @@
-No cmd
-
-npm install express &
-npm install express-handlebars &
-npm install body-parser &
-npm install -g nodemon &
-npm install sequelize &
-npm install mysql2 &
-npm install bcrypt &
-npm install express-validator &
-npm install express-session &
-npm install jsonwebtoken &
-npm install connect-flash &
-npm install dotenv &
-npm install passport &
-npm install passport-local &
-npm install cors &
-npm install connect-flash
+Instalar MySQl e MySQl Workbench
+Criar base de dados chamada sportech
+substituir seu usuário e senha no arquivo database.js
+rodar o comando npm install no projeto
+rodar o comando npm start no projeto
