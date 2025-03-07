@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const sequelize = require('./database');
-const adminRoute = require('./Routes/admin');
-const userRoute = require('./Routes/usuario');
+const donoQuadraRoute = require('./Routes/donoQuadra');
+const jogadorRoute = require('./Routes/usuarioJogador');
 const cors = require('cors'); // Novo módulo para CORS
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -55,8 +55,8 @@ sequelize.authenticate()
     });
 
 // Rotas da API
-app.use('/api/admin', adminRoute);
-app.use('/api/usuario', userRoute);
+app.use('/api/donoQuadra', donoQuadraRoute);
+app.use('/api/usuarioJogador', jogadorRoute);
 
 // Rota inicial
 app.get('/', (req, res) => {

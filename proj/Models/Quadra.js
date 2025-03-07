@@ -1,7 +1,7 @@
 // Conecta no Banco
 const Sequelize = require('sequelize')
 const sequelize = require('../database')
-const Usuario = require('../Models/Usuario');
+const Usuario = require('./donoQuadra');
 
 //Model(tabela sem comando sql) - Usuarios
 const Quadra = sequelize.define('quadra',{

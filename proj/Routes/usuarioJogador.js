@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Usuario = require('../Models/Usuario');
+const Jogador = require('../Models/Jogador');
 const Time = require('../Models/Time')
 const bcrypt = require('bcrypt');
 const { Op, where } = require('sequelize');
@@ -56,8 +56,6 @@ router.post("/registro", async (req, res) => {
             nome: req.body.nome,
             documento,
             email: req.body.email,
-            endereco: req.body.endereco,
-            data_nascimento: req.body.dataNasc,
             senha: hash
         });
 

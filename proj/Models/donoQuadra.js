@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../database'); // Conexão com o banco de dados PostgreSQL
 
 // Modelo (tabela sem comando SQL) - Usuarios
-const Usuario = sequelize.define('usuarios', {
+const donoQuadra = sequelize.define('donoQuadra', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -17,34 +17,28 @@ const Usuario = sequelize.define('usuarios', {
         allowNull: false,
         unique: true,
     },
-    eAdmin: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-    },
-    endereco: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     documento: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
+    celular: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    }
+    ,
     senha: {
         type: DataTypes.CHAR(60),
         allowNull: false,
     },
-    data_nascimento: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
     data_criacao: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW, // Sequelize.NOW funciona no PostgreSQL também
+        defaultValue: Sequelize.NOW, 
         allowNull: false,
     },
 }, {
     timestamps: false, // Desativa os campos createdAt e updatedAt
 });
 
-module.exports = Usuario;
+module.exports = donoQuadra;

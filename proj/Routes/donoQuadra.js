@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Usuario = require('../Models/Usuario');
+const donoQuadra = require('../Models/donoQuadra');
 const Quadra = require('../Models/Quadra');
 const bcrypt = require('bcrypt');
 const { Op, where } = require('sequelize');
@@ -28,21 +28,25 @@ router.post("/registro", async (req, res) => {
                 erros.push({ texto: "Email inválido!" });
             }
     }
-    if (!req.body.endereco) erros.push("Endereço inválido!");
-    if (!req.body.dataNasc) erros.push("Data inválida!");
     if (req.body.senha.length < 8) erros.push("Senha muito curta!(adicione no mínimo 8 caracteres)");
     if (req.body.senha !== req.body.senha2) erros.push("As senhas são diferentes!");
 
     const documento = req.body.documento.replace(/\D/g, '');
     if (documento.length === 11 && !validarCPF(documento)) erros.push("CPF inválido!");
     if (documento.length === 14 && !validarCNPJ(documento)) erros.push("CNPJ inválido!");
+    
+    const celular = req.body.celular.replace(/\D/g, ''); 
+
+    if (celular.length !== 11 || !/^([1-9]{2})9[0-9]{8}$/.test(celular)) {
+        erros.push("Celular inválido!");
+    }
 
     if (erros.length > 0) {
         return res.status(400).json({ errors: erros });
     }
 
     try {
-        const usuarioExistente = await Usuario.findOne({
+        const usuarioExistente = await donoQuadra.findOne({
             where: { [Op.or]: [{ email: req.body.email }, { documento }] }
         });
 
@@ -53,19 +57,17 @@ router.post("/registro", async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(req.body.senha, salt);
 
-        const novoUsuario = await Usuario.create({
+        const novoUsuario = await donoQuadra.create({
             nome: req.body.nome,
             documento,
             email: req.body.email,
-            endereco: req.body.endereco,
-            data_nascimento: req.body.dataNasc,
+            celular: req.body.celular, 
             senha: hash,
-            eAdmin: true
         });
 
         res.status(201).json({ message: "Usuário registrado com sucesso!" });
     } catch (err) {
-        res.status(500).json({ error: "Erro interno do servidor" });
+        res.status(500).json({ error: err.message });
     }
 });
 
@@ -117,7 +119,7 @@ router.get('/info/:id', async (req,res) => {
     
     try{ 
         const userId = req.params.id
-        const user = await Usuario.findOne({where: {id: userId}});
+        const user = await donoQuadra.findOne({where: {id: userId}});
         return res.json(user)
     }
     catch(error){
