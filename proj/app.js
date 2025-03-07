@@ -9,7 +9,7 @@ const cors = require('cors'); // Novo módulo para CORS
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-require('./Config/auth')(passport);
+require('./Config/authDonoQuadra')(passport);
 
 // Iniciar o servidor
 const PORT = 8081;
